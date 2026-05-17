@@ -15,6 +15,7 @@ install.packages("tidyverse")
 library(datasets)
 library(tidyverse)
 
+base::library()
 
 # Calculator 
 x=10^2 # square
@@ -25,7 +26,7 @@ y=2*x
 
 ## Data Types and objects
 # Character
-l ="R is useful"
+Mych3 ="R is useful"
 class(l)
 
 # Logical
@@ -61,17 +62,22 @@ class(ma1)
 ma2= matrix(data=c(10,45,56,90),nrow = 2)
 
 # Data frames
-df=data.frame(x=rnorm(100),y=rnorm(100,mean = 5))
+df=data.frame(myv1=rnorm(100),myv2=rnorm(100,mean = 5))
 summary(df)
-x=df$x
-y=df$y
+# access to df variables
+x=df$myv1
+y=df$myv2
 
 class(df)
 
 # Lists
-L=list(one=1, two=c(1,2),five=seq(0,1,0.1), six="student",mydata=murders)
+L=list(myfirstelement=1, 
+       two=c(1,2),
+       third=seq(0,1,0.1), 
+       six="student",
+       mydata=airquality)
 class(L)
-L$five
+L$third
 
 
 
@@ -83,7 +89,7 @@ example(mean)
 
 sum(x)
 mean(x)
-sd(x)
+sd(x) # standard deviation
 summary(x)
 var(x)
 
@@ -98,11 +104,6 @@ vec1[1] = 5
 vec1[c(2,5,6)]
 vec1[1:3]
 
-# Named vector
-r=c(1:3)
-names(r) = c("f","s","t")
-r[5]=2
-barplot(r)
 
 
 
@@ -132,18 +133,21 @@ mdata$speed2=mdata$speed^2
 library(reshape)
 mdata=rename(mdata,c("speed"="mspeed", "speed2"="s2"))
 
+names(mdata) = c("speed", "dist", "time", "speedsqr")
+
 # Create categories from continuous variable
-mdata$newdata= (mdata$mspeed >=5) + (mdata$mspeed >=10) + (mdata$mspeed >=15)  +(mdata$mspeed >=20) 
+mdata$newdata= (mdata$mspeed >=5) + (mdata$mspeed >=10) + 
+  (mdata$mspeed >=15)  +(mdata$mspeed >=20) 
 mdata$ndata= cut(mdata$mspeed, breaks = c(4,5,10), labels = c("cut0","cut1"), right = FALSE)
 
 
 # Drop or keep variables in a dataset
 library(datasets)
 library(carData)
-mdata=Salaries
+data=Salaries
 
-submdata=subset(mdata,select = c("discipline","salary"))
-submdata1=mdata[,c(1:4)]
+submdata=subset(Salaries,select = c("discipline","salary"))
+submdata1=Salaries[,c(1:4)]
 submdata2=subset(mdata,select = c(-2,-3))
 
 # Keep Unique values
@@ -167,9 +171,9 @@ mdata=rnorm(100,mean = 0,sd=1)
 hist(mdata,freq = T)
 # plot
 plot(mdata,
-     type="p",
-     col="red",
-     pch=ifelse(abs(mdata)>2,1,19),
+     type="o",
+     col="blue",
+     pch=ifelse(abs(rnorm(100,mean = 0, sd =1))>1,1,19),
      xlim = c(-1,100),
      ylim = c(-3,4),
      xlab = "Number from SND"
@@ -231,7 +235,6 @@ choose(10,5)
 W=5
 if (W<8){
   d=2
-
 }else {
   d=10
 }
@@ -248,6 +251,11 @@ f=a[b==5 | b==6]
 h=seq(1,8)
 
 s=numeric()
+
+for (k in h) {
+  s[k] = h[k]*10
+}
+
 for (l in 1:8) {
   s[l]=h[l]*10
 }
