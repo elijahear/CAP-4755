@@ -33,7 +33,7 @@ filter(murders, rate < 1)
 
 # Select: pick variables
 new_table = select(murders, state, region, rate)
-filter(new_table, rate <1)
+filter(new_table, rate <0.7)
 
 
 # The pipe operator %>%
@@ -128,16 +128,18 @@ murders %>% ggplot()
 ggplot1 = murders %>% ggplot(mapping = aes(x=population/10^6, y=total)) 
 ggplot1
 
+ggplot1 + geom_point(aes(col=region), size=3) + geom_text(aes(label =abb))
+
 ggplot1 + geom_point(aes(col=region), size = 3) +
   geom_text_repel(aes(label=abb))+
   scale_x_log10() +
   scale_y_log10() +
-  geom_smooth(formula = "y~x", method = lm)+
+  geom_smooth(formula = "y-x", method = lm)+
   xlab("Populations in millions (log10 scale)") + 
   ylab("Total number of murders (log10 scale)") +
   ggtitle("US Gun Murders in 2010") +
   scale_color_discrete(name = "Region") +
-      theme_dark()
+      theme_minimal()
 
 
   
@@ -226,7 +228,7 @@ ggplot1 + geom_point(aes(col=region), size = 3) +
   g + geom_histogram(aes(fill=class), 
                      bins=15,  # change number of bins
                      col="black", 
-                     size=2) +  
+                     size=1) +  
     labs(title="Histogram with Fixed Bins", 
          subtitle="Engine Displacement across Vehicle Classes")
   
