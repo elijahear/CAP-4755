@@ -1,0 +1,150 @@
+---
+title: "R Project"
+subtitle: "Tools For Data Science"
+author: "Student Name"
+format: html
+self-contained: true
+execute:
+  warning: FALSE
+  message: FALSE
+---
+
+## **Instructions**
+
+In this project you will be working with R base and Tidyverse.
+
+1.  ***Render*** the empty file to make sure everything is working
+2.  Consistently *Render* the file each time you answer a question
+
+⚠️ Students enrolled in CAP4755 should only solve: **1, 2, 3, 4, 6, 7, 8, and 9.**
+
+## R Base (40%)
+
+1.  Compute the difference between the current year and the year you started coding divide this by the difference between the current year and the year you were born. Multiply this with 100 to get the percentage of your life you have been programming.
+
+```{r}
+#Code here
+
+```
+
+2.  Compute the mean of the square root of a vector of 100 random numbers.
+
+```{r}
+#Code here
+# generate 100 random numbers
+
+# find the sqrt
+
+# find the mean
+
+```
+
+3.  Make a vector from 1 to 100. Make a `for-loop` which runs through the whole vector. Multiply the elements which are smaller than 20 or larger than 80 by 10 and the other elements by 0.1.
+
+```{r}
+#Code here
+
+```
+
+4.  Write a *`function`* to combine questions 2 and 3, so that you can feed it an integer `n` you like (as argument). The function 1) generates `n` random number, 2) multiplies the elements which are smaller than 20 or larger than 80 by 10 and the other elements by 0.1, then 3) returns the mean of the square root of the vector.
+
+```{r}
+#Code here
+
+```
+
+## R Tidyverse (60%)
+
+### Baby names distribution data
+
+We will look into the distribution of baby names. Use Tidyverse to answer the questions. This data set has over 2 millions rows from 1880 to 2022 It was provided by the Social Security Administration. It has the following variables:
+
+-   year: birth year
+-   sex: Female or Male
+-   name: baby name
+-   n: number of babies named "name" in that year with that sex
+
+#### Data Wrangling
+
+Read the data in R and called it **`bbnames`**:
+
+```{r}
+# load packages
+library(data.table)
+library(tidyverse)
+
+# Load the data - take a minute to load :)
+bbnames = fread("https://pages.uwf.edu/acohen/teaching/datasets/babynames.csv", drop = "V1")
+bbnames
+
+# Code here
+```
+
+5.  Find the number of babies (names) born in the same year. (hints: use `group_by` and `summarise`). Then, find which year had the highest number of babies:
+
+```{r}
+#Code here
+
+```
+
+6.  Find the most popular, all time, name for each sex (hints: answer for females starts with **M** and males with **J**):
+
+```{r}
+#Code here
+
+```
+
+7.  Create a new data frame while creating a new variable `age` and filter by `age` - Pick a threshold that would keep only people who may still alive (you may use the age expectancy):
+
+```{r}
+#Code here
+
+```
+
+#### Visualization
+
+8.  Use ggplot to plot the distribution of the name *John, x-axis is `year`* and y-axis is `counts`. Use `geom_bar()`, `geom_line()`, and `facet_wrap()` to separate females and males (use `scale="free"` to free the scales) .
+
+```{r}
+#Code here
+
+```
+
+9.  Use ggplot to plot the distribution of the name of your choice, *x-axis is `year`* and y-axis is `counts`. Use `geom_bar()`, `geom_line()`, and `facet_wrap()` to separate females and males (use `scale="free"` to free the scales) .
+
+```{r}
+#Code here
+
+```
+
+### Pilots certification data
+
+Data was obtained from the Federation Aviation Administration (FAA) in June 2023 on pilot certification. The data has over 450000 pilots records and contained the following:
+
+-   ID: pilot ID
+-   STATE: US state where the pilot lives
+-   CertLevel: the certification level (Airline, Commercial, Student, Sport, Private, and Recreational),
+-   MedClass: the medical class,
+-   MedExpMonth: the medical expire month, and
+-   MedExpYear: the medical expire year.
+
+Read the data in R and called it **`pilots`**:
+
+```{r}
+# Code here
+
+# load packages
+library(data.table)
+library(tidyverse)
+
+# Load the data 
+pilots = fread("https://pages.uwf.edu/acohen/teaching/datasets/pilotscertification.csv")
+pilots
+```
+
+10. Find how many pilots per certification level will have their medical certification expires the current year and month
+
+```{r}
+# Code here
+  
+```
