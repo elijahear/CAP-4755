@@ -1,7 +1,7 @@
 ---
 title: "R Project"
 subtitle: "Tools For Data Science"
-author: "Student Name"
+author: "Elijah Ear"
 format: html
 self-contained: true
 execute:
@@ -23,34 +23,59 @@ In this project you will be working with R base and Tidyverse.
 1.  Compute the difference between the current year and the year you started coding divide this by the difference between the current year and the year you were born. Multiply this with 100 to get the percentage of your life you have been programming.
 
 ```{r}
-#Code here
+
+((2026 - 2023 ) / (2026 - 2004)) * 100
 
 ```
 
 2.  Compute the mean of the square root of a vector of 100 random numbers.
 
 ```{r}
-#Code here
-# generate 100 random numbers
+x <- runif(100)
 
-# find the sqrt
+mean_sqrt <- mean(sqrt(x))
 
-# find the mean
+mean_sqrt
 
 ```
 
 3.  Make a vector from 1 to 100. Make a `for-loop` which runs through the whole vector. Multiply the elements which are smaller than 20 or larger than 80 by 10 and the other elements by 0.1.
 
 ```{r}
-#Code here
+x <- 1:100
 
+for (i in 1:length(x)) {
+  
+  if (x[i] < 20 || x[i] > 80) {
+    x[i] <- x[i] * 10
+  } else {
+    x[i] <- x[i] * 0.1
+  }
+}
+
+x
 ```
 
 4.  Write a *`function`* to combine questions 2 and 3, so that you can feed it an integer `n` you like (as argument). The function 1) generates `n` random number, 2) multiplies the elements which are smaller than 20 or larger than 80 by 10 and the other elements by 0.1, then 3) returns the mean of the square root of the vector.
 
 ```{r}
-#Code here
+my_function <- function(n) {
 
+x <- runif(n, 1, 100)
+
+for(i in 1:length(x)) {
+  
+  if(x[i] < 20 || x[i] > 80) {
+    x[i] <- x[i] * 10
+  } else {
+    x[i] <- x[i] * 0.1
+    }
+  }
+
+mean (sqrt(x))
+}
+
+my_function(100)
 ```
 
 ## R Tidyverse (60%)
@@ -90,15 +115,15 @@ bbnames
 6.  Find the most popular, all time, name for each sex (hints: answer for females starts with **M** and males with **J**):
 
 ```{r}
-#Code here
-
+bbnames[, .(total = sum(counts)), by = .(sex, name)][order(sex, -total)][,  .SD[1], by = sex]
 ```
 
 7.  Create a new data frame while creating a new variable `age` and filter by `age` - Pick a threshold that would keep only people who may still alive (you may use the age expectancy):
 
 ```{r}
-#Code here
-
+bbnames_alive <- bbnames[, age := 2026 - year]
+bbnames_alive <- bbnames[age <= 85]
+bbnames_alive
 ```
 
 #### Visualization
@@ -106,14 +131,38 @@ bbnames
 8.  Use ggplot to plot the distribution of the name *John, x-axis is `year`* and y-axis is `counts`. Use `geom_bar()`, `geom_line()`, and `facet_wrap()` to separate females and males (use `scale="free"` to free the scales) .
 
 ```{r}
-#Code here
+john_data <- bbnames[name == "John"]
+
+library(ggplot2)
+
+ggplot(john_data, aes(x = year, y = counts)) +
+  geom_bar(stat = "identity", alpha = 0.3) +
+  geom_line() +
+  facet_wrap(~sex, scales = "free") +
+  labs(
+    title = "Distribution of the name 'John' over time",
+    x = "Year",
+    y = "Counts"
+  )
 
 ```
 
 9.  Use ggplot to plot the distribution of the name of your choice, *x-axis is `year`* and y-axis is `counts`. Use `geom_bar()`, `geom_line()`, and `facet_wrap()` to separate females and males (use `scale="free"` to free the scales) .
 
 ```{r}
-#Code here
+mary_data <- bbnames[name == "Mary"]
+
+library(ggplot2)
+
+ggplot(mary_data, aes(x = year, y = counts)) +
+  geom_bar(stat = "identity", alpha = 0.3) +
+  geom_line() +
+  facet_wrap(~sex, scales = "free") +
+  labs(
+    title = "Distribution of the name 'Mary' over time",
+    x = "Year",
+    y = "Counts"
+  )
 
 ```
 
