@@ -1,7 +1,7 @@
 ---
 title: "Python Project"
 subtitle: "Tools For Data Science"
-author: "Student Name"
+author: "Elijah Ear"
 #date: "add semester/date"
 format: html
 self-contained: true
@@ -22,34 +22,77 @@ In this project you will be working with Python.
 1.  Compute the difference between 2022 and the year you started programming divide this by the difference between 2022 and the year you were born. Multiply this with 100 to get the percentage of your life you have been programming
 
 ```{python}
-#Code here
+birth_year = 2004
+start_year = 2023
+
+percentage = ((2022 - start_year) / (2022 - birth_year)) * 100
+
+print(f"{percentage:.2f}%")
 
 ```
 
 2.  Compute the mean of the square root of a vector of 100 random numbers.
 
 ```{python}
-#Code here
-# generate 100 random numbers
+import numpy as np
 
-# find the sqrt
+numbers = np.random.rand(100)
 
-# find the mean
+sqrt_values = np.sqrt(numbers)
+
+mean_value = np.mean(sqrt_values)
+
+print(mean_value)
 
 ```
 
 3.  Make a vector from 1 to 100. Make a for-loop which runs through the whole vector. Multiply the elements which are smaller than 11 or larger than 90 with 10 and the other elements with 0.1
 
 ```{python}
-#Code here
+vector = list(range(1, 101))
+
+result = []
+
+for x in vector:
+  if x < 11 or x > 90:
+    result.append(x * 10)
+  else:
+      result.append(x * 0.1)
+      
+print(result)
 
 ```
 
 4.  Write a function to combine questions 2 and 3, so that you can feed it an integer n you like (as argument). The function 1) generates n random number, 2) multiplies the elements which are smaller than 11 or larger than 90 by 10 and the other elements by 0.1, then 3) returns the mean of the square root of the vector.
 
 ```{python}
-#Code here
+import random
+import math
 
+def my_function(n):
+  vector = []
+  
+  for i in range(n):
+    vector.append(random.random())
+    
+  processed = []
+
+  for x in vector:
+    if x < 11 or x > 90:
+      processed.append(x * 10)
+    else:
+     processed.append(x * 0.1)
+  
+  total = 0
+
+  for x in processed:
+      total = total + math.sqrt(x)
+  
+  mean = total / n
+
+  return mean
+
+print(my_function(100))
 ```
 
 ## Data More
@@ -73,20 +116,36 @@ We shall build a predictive model for the Cost (Y) given X1, X2, X3, and X4.
 ```{python}
 # Load the data
 import statsmodels.api as stat
+import matplotlib.pyplot as plt
 aircraft = stat.datasets.get_rdataset("aircraft", "robustbase").data # load data "aircraft" from the R package 'robustbase'
 ```
 
 5.  Plot histogram of the Cost (see examples from [notes](https://pages.uwf.edu/acohen/TFDS/t4ds/week6.html#a-few-plots))
 
 ```{python}
-#Code here
+plt.hist(aircraft["Y"], bins=10)
+
+plt.xlabel("Cost (in $100,000 units)")
+plt.ylabel("Frequency")
+plt.title("Histogram of Aircraft Cost")
+
+plt.show()
 
 ```
 
 6.  Split data to 80% training and 20% testing data sets
 
 ```{python}
-#Code here
+from sklearn.model_selection import train_test_split
+
+X = aircraft[["X1", "X2", "X3", "X4"]]
+y = aircraft["Y"]
+
+X_train, X_test, y_train, y_test = train_test_split( X, y,
+test_size=0.2,
+random_state=42)
+
+print(len(X_train), len(X_test))
 
 ```
 
