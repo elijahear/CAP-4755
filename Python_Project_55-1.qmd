@@ -1,0 +1,120 @@
+---
+title: "Python Project"
+subtitle: "Tools For Data Science"
+author: "Student Name"
+#date: "add semester/date"
+format: html
+self-contained: true
+execute:
+  warning: FALSE
+  message: FALSE
+---
+
+In this project you will be working with Python.
+
+1.  ***Render*** the empty file (to make sure everything is working)
+2.  Consistently *Render* the file each time you answer a question
+
+⚠️ Students enrolled in CAP4755 should only solve: **1 to 6.**
+
+## Python Basics
+
+1.  Compute the difference between 2022 and the year you started programming divide this by the difference between 2022 and the year you were born. Multiply this with 100 to get the percentage of your life you have been programming
+
+```{python}
+#Code here
+
+```
+
+2.  Compute the mean of the square root of a vector of 100 random numbers.
+
+```{python}
+#Code here
+# generate 100 random numbers
+
+# find the sqrt
+
+# find the mean
+
+```
+
+3.  Make a vector from 1 to 100. Make a for-loop which runs through the whole vector. Multiply the elements which are smaller than 11 or larger than 90 with 10 and the other elements with 0.1
+
+```{python}
+#Code here
+
+```
+
+4.  Write a function to combine questions 2 and 3, so that you can feed it an integer n you like (as argument). The function 1) generates n random number, 2) multiplies the elements which are smaller than 11 or larger than 90 by 10 and the other elements by 0.1, then 3) returns the mean of the square root of the vector.
+
+```{python}
+#Code here
+
+```
+
+## Data More
+
+We will reproduce the example given in the ebook here [fitting a simple machine learnig model](https://pages.uwf.edu/acohen/TFDS/t4ds/week6.html#linear-models). Exactly follow the example from the notes to do this part of the project using the data `aircraft` from `robustbase` R package.
+
+`Aircraft` Data, deals with 23 single-engine aircraft built over the years 1947-1979, from Office of Naval Research. The dependent variable is cost (in units of \$100,000) and the explanatory variables are aspect ratio, lift-to-drag ratio, weight of plane (in pounds) and maximal thrust. A data frame with 23 observations on the following 5 variables:
+
+-   X1 is `Aspect Ratio`,
+
+-   X2 is `Lift-to-Drag Ratio`,
+
+-   X3 is `Weight`,
+
+-   X4 is `Thrust`, and
+
+-   Y is `Cost.`
+
+We shall build a predictive model for the Cost (Y) given X1, X2, X3, and X4.
+
+```{python}
+# Load the data
+import statsmodels.api as stat
+aircraft = stat.datasets.get_rdataset("aircraft", "robustbase").data # load data "aircraft" from the R package 'robustbase'
+```
+
+5.  Plot histogram of the Cost (see examples from [notes](https://pages.uwf.edu/acohen/TFDS/t4ds/week6.html#a-few-plots))
+
+```{python}
+#Code here
+
+```
+
+6.  Split data to 80% training and 20% testing data sets
+
+```{python}
+#Code here
+
+```
+
+7.  Create outcome (Cost) and features (Xi) from training data and testing data (see examples from [notes](https://pages.uwf.edu/acohen/TFDS/t4ds/week6.html#linear-models))
+
+```{python}
+#Code here
+
+
+```
+
+8.  fit a linear regression on training data set
+
+```{python}
+#Code here
+
+```
+
+9.  Predict using the fit and testing data set
+
+```{python}
+#Code here
+
+```
+
+10. Calculate MAPE
+
+```{python}
+#Code here
+
+```
